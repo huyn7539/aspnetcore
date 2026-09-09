@@ -17,6 +17,9 @@
     -->
     <TestRequiresTargetingPackDownload>true</TestRequiresTargetingPackDownload>
     <TestRequiresRuntimePackDownload>true</TestRequiresRuntimePackDownload>
+
+    <!-- Workaround while the bootstrap SDK does not contain pruning data for the target framework. -->
+    <LoadPrunePackageDataFromNearestFramework>true</LoadPrunePackageDataFromNearestFramework>
   </PropertyGroup>
 
   <Import Project="${ArtifactsBinDir}GenerateFiles\Directory.Build.props" />
