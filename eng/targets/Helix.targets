@@ -30,6 +30,14 @@
     <HelixPreCommand Include="call RunPowershell.cmd installPlaywrightReqs.ps1 || exit /b 1" />
   </ItemGroup>
 
+  <!-- Bootstrap ASP.NET Core 11 test assets need to run in a .NET 12 testhost during early branding. -->
+  <ItemGroup Condition="'$(TestDependsOnPlaywright)' == 'true' AND
+      '$(IsWindowsHelixQueue)' == 'true' AND
+      '$(TargetFramework)' == 'net12.0' AND
+      '$(DoNotApplyWorkaroundsToMicrosoftAspNetCoreApp)' == 'true'">
+    <HelixPreCommand Include="set %22DOTNET_ROLL_FORWARD=Major%22" />
+  </ItemGroup>
+
   <ItemGroup Condition="'$(TestDependsOnIIS)' == 'true' AND '$(IsWindowsOnlyTest)' == 'true'">
     <HelixContent Include="$(RepoRoot)src\Servers\IIS\tools\update_schema.ps1" />
     <HelixContent Include="$(RepoRoot)src\Servers\IIS\tools\UpdateIISExpressCertificate.ps1" />
