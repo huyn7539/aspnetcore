@@ -304,6 +304,8 @@ public static class TestData
 
     public static string GetSharedFxVersion() => GetTestDataValue("SharedFxVersion");
 
+    public static string GetAspNetCoreAssemblyVersion() => GetTestDataValue("AspNetCoreAssemblyVersion");
+
     public static string GetDefaultNetCoreTargetFramework() => GetTestDataValue("DefaultNetCoreTargetFramework");
 
     public static string GetMicrosoftNETCoreAppVersion() => GetTestDataValue("MicrosoftNETCoreAppRefVersion");

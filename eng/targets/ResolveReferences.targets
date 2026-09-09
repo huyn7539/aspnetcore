@@ -294,11 +294,17 @@
           '$(IsImplementationProject)' == 'true' AND
           '$(MSBuildProjectName)' != 'Microsoft.AspNetCore.App.Runtime' AND
           $(_CompileTfmUsingReferenceAssemblies)) ">
+    <PropertyGroup>
+      <_RuntimeAspNetCoreTransportTargetFramework>$(TargetFramework)</_RuntimeAspNetCoreTransportTargetFramework>
+      <_RuntimeAspNetCoreTransportTargetFramework
+          Condition="'$(TargetFramework)' == '$(DefaultNetCoreTargetFramework)' AND
+            '$(DefaultNetCoreTargetFramework)' != '$(NetCurrent)'">$(NetCurrent)</_RuntimeAspNetCoreTransportTargetFramework>
+    </PropertyGroup>
     <ItemGroup>
       <ResolvedCompileFileDefinitions Remove="@(ResolvedCompileFileDefinitions)"
           Condition=" '%(NuGetPackageId)' != 'Microsoft.Internal.Runtime.AspNetCore.Transport' AND
-              EXISTS('$(PkgMicrosoft_Internal_Runtime_AspNetCore_Transport)\ref\$(TargetFramework)\%(Filename).dll') AND
-              $([System.String]::new('%(Directory)').Contains('$(TargetFramework)')) " />
+              EXISTS('$(PkgMicrosoft_Internal_Runtime_AspNetCore_Transport)\ref\$(_RuntimeAspNetCoreTransportTargetFramework)\%(Filename).dll') AND
+              $([System.String]::new('%(Directory)').Contains('$(_RuntimeAspNetCoreTransportTargetFramework)')) " />
     </ItemGroup>
   </Target>
 

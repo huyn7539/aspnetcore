@@ -167,8 +167,7 @@ public class SharedFxTests
 
         var versionStringWithoutPrereleaseTag = TestData.GetMicrosoftNETCoreAppVersion().Split('-', 2)[0];
         var version = Version.Parse(versionStringWithoutPrereleaseTag);
-        var aspnetcoreVersionString = TestData.GetSharedFxVersion().Split('-', 2)[0];
-        var aspnetcoreVersion = Version.Parse(aspnetcoreVersionString);
+        var aspnetcoreVersion = Version.Parse(TestData.GetAspNetCoreAssemblyVersion());
 
         var dlls = Directory.GetFiles(_sharedFxRoot, "*.dll", SearchOption.AllDirectories);
         Assert.NotEmpty(dlls);
