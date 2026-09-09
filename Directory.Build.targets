@@ -131,6 +131,8 @@
       '$(Language)' == 'C#' AND
       '$(TargetFrameworkIdentifier)' != '.NETFramework' ">
     <AssemblyVersion>$(AspNetCoreMajorMinorVersion).0.0</AssemblyVersion>
+    <!-- The bootstrap SDK's reference pack still uses the previous major assembly version. -->
+    <AssemblyVersion Condition=" '$(PinAspNetCoreAssemblyVersionToPreviousMajor)' != 'false' ">11.0.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup>
