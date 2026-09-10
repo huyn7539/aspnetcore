@@ -31,11 +31,10 @@
   </ItemGroup>
 
   <!-- Bootstrap ASP.NET Core 11 test assets need to run in a .NET 12 testhost during early branding. -->
-  <ItemGroup Condition="'$(TestDependsOnPlaywright)' == 'true' AND
-      '$(IsWindowsHelixQueue)' == 'true' AND
-      '$(TargetFramework)' == 'net12.0' AND
+  <ItemGroup Condition="'$(TargetFramework)' == 'net12.0' AND
       '$(DoNotApplyWorkaroundsToMicrosoftAspNetCoreApp)' == 'true'">
-    <HelixPreCommand Include="set %22DOTNET_ROLL_FORWARD=Major%22" />
+    <HelixPreCommand Condition="'$(IsWindowsHelixQueue)' == 'true'" Include="set %22DOTNET_ROLL_FORWARD=Major%22" />
+    <HelixPreCommand Condition="'$(IsWindowsHelixQueue)' != 'true'" Include="export DOTNET_ROLL_FORWARD=Major" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TestDependsOnIIS)' == 'true' AND '$(IsWindowsOnlyTest)' == 'true'">
